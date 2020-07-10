@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetFacilities">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="parameter" type="tns:InputParam" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="InputParam">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="dateFrom" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="dateTo" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetFacilitiesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFacilitiesResult" type="tns:ArrayOfFacility" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfFacility">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Facility" nillable="true" type="tns:Facility" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Facility">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Tel" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Fax" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Mobile" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Website" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LicenseStatus" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LegalEntity" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Jurisdiction" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Street" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Country" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="listActivities" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="FacilityType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LicenseTo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LicenseFrom" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FacilityLicense" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FacilityName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Authentication" type="tns:Authentication" />
+      <s:complexType name="Authentication">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="secid" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="GetProfessionals">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="parameter" type="tns:InputParam" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProfessionalsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetProfessionalsResult" type="tns:ArrayOfHCP" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfHCP">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="HCP" nillable="true" type="tns:HCP" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="HCP">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="EmiratesID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PassportNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PassportIssuingCountry" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="License" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FullName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PhoneNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Qualification" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FacilityLicense" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FacilityName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="facilities" type="tns:ArrayOfFacility" />
+          <s:element minOccurs="0" maxOccurs="1" name="Location" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ActiveFrom" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ActiveTo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IsActive" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Source" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SpecialtyID1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SpecialtyDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Gender" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nationality" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SpecialtyID2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SpecialtyID3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HCType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DHCCSpecialty1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DHCCSpecialty2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DHCCSpecialty3" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetFacilitiesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFacilities" />
+  </wsdl:message>
+  <wsdl:message name="GetFacilitiesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFacilitiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFacilitiesAuthentication">
+    <wsdl:part name="Authentication" element="tns:Authentication" />
+  </wsdl:message>
+  <wsdl:message name="GetProfessionalsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProfessionals" />
+  </wsdl:message>
+  <wsdl:message name="GetProfessionalsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProfessionalsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProfessionalsAuthentication">
+    <wsdl:part name="Authentication" element="tns:Authentication" />
+  </wsdl:message>
+  <wsdl:portType name="HCPServiceSoap">
+    <wsdl:operation name="GetFacilities">
+      <wsdl:input message="tns:GetFacilitiesSoapIn" />
+      <wsdl:output message="tns:GetFacilitiesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProfessionals">
+      <wsdl:input message="tns:GetProfessionalsSoapIn" />
+      <wsdl:output message="tns:GetProfessionalsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="HCPServiceSoap" type="tns:HCPServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetFacilities">
+      <soap:operation soapAction="http://tempuri.org/GetFacilities" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetFacilitiesAuthentication" part="Authentication" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProfessionals">
+      <soap:operation soapAction="http://tempuri.org/GetProfessionals" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetProfessionalsAuthentication" part="Authentication" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="HCPServiceSoap12" type="tns:HCPServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetFacilities">
+      <soap12:operation soapAction="http://tempuri.org/GetFacilities" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetFacilitiesAuthentication" part="Authentication" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProfessionals">
+      <soap12:operation soapAction="http://tempuri.org/GetProfessionals" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetProfessionalsAuthentication" part="Authentication" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="HCPService">
+    <wsdl:port name="HCPServiceSoap" binding="tns:HCPServiceSoap">
+      <soap:address location="https://epayqa.dhcr.gov.ae/dha/HCPService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="HCPServiceSoap12" binding="tns:HCPServiceSoap12">
+      <soap12:address location="https://epayqa.dhcr.gov.ae/dha/HCPService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
