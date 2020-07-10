@@ -21,6 +21,7 @@ namespace DHCC_Client
             else if (method == "manual")
             {
                 Dhcc.Start();
+
             }
 
             //Dhcc.RemoveDuplicates(@"C:\tmp\DHA\For Rana\Sheryan_Clinicians_20200518001500_LMUPassed.csv");
