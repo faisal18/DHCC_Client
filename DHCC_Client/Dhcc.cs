@@ -286,7 +286,7 @@ namespace DHCC_Client
                                             {
 
                                                 //New rules as of 27th January 2021 from email "DHCC clinician Analysis"
-                                                if (listHCP[i].DHCCSpecialty1.ToUpper() != "MR-O" && listHCP[i].DHCCSpecialty1.ToUpper() != "MR")
+                                                if (listHCP[i].SpecialtyID1.ToUpper() != "MR-O" && listHCP[i].SpecialtyID1.ToUpper() != "MR")
                                                 {
 
                                                     sb.Append(
@@ -345,7 +345,7 @@ namespace DHCC_Client
                             Logger.Info("Appending records to Clinician file");
                             clinician.Write(sb);
                         }
-                        Logger.Info("\nRecords Found:" + listHCP.Length + " Date From: " + strFrom + " To: " + strTo);
+                        //Logger.Info("\nRecords Found:" + listHCP.Length + " Date From: " + strFrom + " To: " + strTo);
                         result = "\nRecords Found:" + listHCP.Length + " Date From: " + strFrom + " To: " + strTo;
                     }
                     else
