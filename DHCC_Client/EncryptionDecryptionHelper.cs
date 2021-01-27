@@ -63,7 +63,7 @@ namespace DHCC_Client
             // handled via a using statement.
 
             string finalDec = "";
-            Logger.Info("Descrypting data: " + data + " for certifacte " + cert);
+            Logger.Info("Descrypting data: " + data);
             try
             {
 

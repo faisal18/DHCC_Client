@@ -13,9 +13,14 @@ namespace DHCC_Client
 
         private static string baseDir = ConfigurationManager.AppSettings["basedir"];
 
+        private static string info = ConfigurationManager.AppSettings["info"];
+        private static string error = ConfigurationManager.AppSettings["error"];
+        private static string dump = ConfigurationManager.AppSettings["dump"];
+
+
         public static void Info(string data)
         {
-            using (StreamWriter writer = File.AppendText(baseDir+"Log\\DHCC_Infolog.csv"))
+            using (StreamWriter writer = File.AppendText(baseDir+"Log\\"+info+".csv"))
             {
                 writer.Write(System.DateTime.Now + " : " + data + "\n");
             }
@@ -23,7 +28,7 @@ namespace DHCC_Client
 
         public static void Error(Exception data)
         {
-            using (StreamWriter writer = File.AppendText(baseDir + "Log\\DHCC_Exceptionlog.csv"))
+            using (StreamWriter writer = File.AppendText(baseDir + "Log\\" + error + ".csv"))
             {
                 writer.Write(System.DateTime.Now + " : " + data + "\n");
             }
@@ -31,9 +36,11 @@ namespace DHCC_Client
 
         public static void DumpTransformed(string data)
         {
-            using (StreamWriter writer = File.AppendText(baseDir + "Log\\DHCC_DumpTransformed.csv"))
+            using (StreamWriter writer = File.AppendText(baseDir + "Log\\" + dump + ".csv"))
             {
-                writer.Write(data+"\n");
+                //writer.Write(data+"\n");
+                writer.Write(System.DateTime.Now + " : " + data + "\n");
+
             }
         }
 

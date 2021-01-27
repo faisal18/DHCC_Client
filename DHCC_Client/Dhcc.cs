@@ -284,36 +284,44 @@ namespace DHCC_Client
                                             if (listHCP[i].License.Trim().Length > 0 && listHCP[i].FullName.Trim().Length > 0 && listHCP[i].IsActive.Trim().Length > 0
                                                 && listHCP[i].Source.Trim().Length > 0 && listHCP[i].HCType.Trim().Length > 0)
                                             {
-                                                sb.Append(
-                                                    //ConvertDate(strFrom) + "," +
-                                                    //ConvertDate(strTo) + "," +
 
-                                                    CheckComma2(listHCP[i].License) + "," +
-                                                    CheckComma2(listHCP[i].FullName) + "," +
-                                                    CheckComma2(listHCP[i].username) + "," +
+                                                //New rules as of 27th January 2021 from email "DHCC clinician Analysis"
+                                                if (listHCP[i].DHCCSpecialty1.ToUpper() != "MR-O" && listHCP[i].DHCCSpecialty1.ToUpper() != "MR")
+                                                {
 
-                                                    password_local + "," +
+                                                    sb.Append(
+                                                        //ConvertDate(strFrom) + "," +
+                                                        //ConvertDate(strTo) + "," +
 
-                                                    CheckComma2(listHCP[i].FacilityLicense) + "," +
-                                                    CheckComma2(listHCP[i].FacilityName) + "," +
-                                                    CheckComma2(listHCP[i].Location) + "," +
+                                                        CheckComma2(listHCP[i].License) + "," +
+                                                        CheckComma2(listHCP[i].FullName) + "," +
+                                                        CheckComma2(listHCP[i].username) + "," +
 
-                                                    ConvertDate(listHCP[i].ActiveFrom) + "," +
-                                                    ConvertDate(listHCP[i].ActiveTo) + "," +
+                                                        password_local + "," +
 
-                                                    CheckComma2(listHCP[i].IsActive) + "," +
-                                                    CheckComma2(listHCP[i].Source) + "," +
-                                                    CheckComma2(listHCP[i].SpecialtyID1) + "," +
-                                                    CheckComma2(listHCP[i].SpecialtyDescription) + "," +
-                                                    CheckComma2(listHCP[i].Gender) + "," +
-                                                    CheckComma2(listHCP[i].Nationality) + "," +
-                                                    CheckComma2(listHCP[i].Email) + "," +
-                                                    CheckComma2(listHCP[i].PhoneNumber) + "," +
-                                                    CheckComma2(listHCP[i].SpecialtyID2) + "," +
-                                                    CheckComma2(listHCP[i].SpecialtyID3) + "," +
-                                                    CheckComma2(listHCP[i].HCType) + "," +
-                                                    "" + "\n"
-                                                    );
+                                                        CheckComma2(listHCP[i].FacilityLicense) + "," +
+                                                        CheckComma2(listHCP[i].FacilityName) + "," +
+                                                        CheckComma2(listHCP[i].Location) + "," +
+
+                                                        ConvertDate(listHCP[i].ActiveFrom) + "," +
+
+                                                        //New rules as of 27th January 2021 from email "DHCC clinician Analysis"
+                                                        Convert.ToDateTime(ConvertDate(listHCP[i].ActiveTo)).AddDays(30).ToString("MM/dd/yyyy hh:mm:ss") + "," +
+
+                                                        CheckComma2(listHCP[i].IsActive) + "," +
+                                                        CheckComma2(listHCP[i].Source) + "," +
+                                                        CheckComma2(listHCP[i].SpecialtyID1) + "," +
+                                                        CheckComma2(listHCP[i].SpecialtyDescription) + "," +
+                                                        CheckComma2(listHCP[i].Gender) + "," +
+                                                        CheckComma2(listHCP[i].Nationality) + "," +
+                                                        CheckComma2(listHCP[i].Email) + "," +
+                                                        CheckComma2(listHCP[i].PhoneNumber) + "," +
+                                                        CheckComma2(listHCP[i].SpecialtyID2) + "," +
+                                                        CheckComma2(listHCP[i].SpecialtyID3) + "," +
+                                                        CheckComma2(listHCP[i].HCType) + "," +
+                                                        "" + "\n"
+                                                        );
+                                                }
                                             }
                                         }
                                         else
@@ -526,13 +534,13 @@ namespace DHCC_Client
                 return "\nException Occured in date from: " + strFrom + " to: " + strTo + "\nError: " + ex.Message;
             }
         }
-        public static string TransformFacility(DHCCHCPService.Facility[] obj_facility,string ClinicianLicense)
+        public static string TransformFacility(DHCCHCPService.Facility[] obj_facility, string ClinicianLicense)
         {
             string result = string.Empty;
             try
             {
                 StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < obj_facility.Length; i++) 
+                for (int i = 0; i < obj_facility.Length; i++)
                 {
                     sb.Append(
                         CheckComma(ClinicianLicense) + "," +
@@ -767,9 +775,9 @@ namespace DHCC_Client
                 string body = "{\r\n \"oldVersion\": 0,\"targetVersion\": " + Specialitiesversion + ",\r\n \"param\" : \"specialtyId=" + data + "\" \r\n}";
 
 
-                if(data!= null)
+                if (data != null)
                 {
-                    if(data.Length>1)
+                    if (data.Length > 1)
                     {
                         result = PostCall_ByBody(url, body, token, username, false);
                         Logger.Info(result);
@@ -785,7 +793,7 @@ namespace DHCC_Client
                     }
                 }
 
-                
+
 
             }
             catch (Exception ex)
@@ -1010,7 +1018,7 @@ namespace DHCC_Client
 
             return resultdate;
         }
-        
+
         #endregion
 
         #region helper_functions
@@ -1100,7 +1108,7 @@ namespace DHCC_Client
                      ,  "dd-MM-yyyy HH:mm:ss"
               };
 
-            Logger.Info("Transforming date " + Rdate);
+            Logger.Info("Transforming date: " + Rdate);
             string activetoDatedata = string.Empty;
             bool isParsed = false;
             DateTime getDatefromString = DateTime.Now;
@@ -1489,7 +1497,7 @@ namespace DHCC_Client
 
             try
             {
-                foreach(string datum in data)
+                foreach (string datum in data)
                 {
                     result = result + datum + "^";
                 }
