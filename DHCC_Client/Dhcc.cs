@@ -91,9 +91,13 @@ namespace DHCC_Client
             string result = string.Empty;
 
 
-            clin_path = local_path + "techsupport_clinician_" + System.DateTime.Now.ToString("yyyyMMddHHmmss") + ".csv";
-            facil_path = local_path + "techsupport_facility_" + System.DateTime.Now.ToString("yyyyMMddHHmmss") + ".csv";
-            reference_absloute = local_path + "techsupport_Reference_" + System.DateTime.Now.ToString("yyyyMMddHHmmss") + ".txt";
+            //clin_path = local_path + "techsupport_clinician_" + System.DateTime.Now.ToString("yyyyMMddHHmmss") + ".csv";
+            //facil_path = local_path + "techsupport_facility_" + System.DateTime.Now.ToString("yyyyMMddHHmmss") + ".csv";
+            //reference_absloute = local_path + "techsupport_Reference_" + System.DateTime.Now.ToString("yyyyMMddHHmmss") + ".txt";
+
+            clin_path = local_path + "DHCC_Clinicians_" + System.DateTime.Now.ToString("yyyyMMddHHmmss") + ".csv";
+            facil_path = local_path + "DHCC_facility_" + System.DateTime.Now.ToString("yyyyMMddHHmmss") + ".csv";
+            reference_absloute = local_path + "DHCC_Reference_" + System.DateTime.Now.ToString("yyyyMMddHHmmss") + ".txt";
 
             Logger.Info("DHCC Process started");
             Logger.Info("Clinician file path " + clin_path);
@@ -286,41 +290,53 @@ namespace DHCC_Client
                                             {
 
                                                 //New rules as of 27th January 2021 from email "DHCC clinician Analysis"
-                                                if (listHCP[i].SpecialtyID1.ToUpper() != "MR-O" && listHCP[i].SpecialtyID1.ToUpper() != "MR")
+                                                if (listHCP[i].SpecialtyID1.ToUpper() != "NP-O" && listHCP[i].SpecialtyID1.ToUpper() != "MR")
                                                 {
 
-                                                    sb.Append(
-                                                        //ConvertDate(strFrom) + "," +
-                                                        //ConvertDate(strTo) + "," +
+                                                    //NEW RULE as of 09Feb2021 to remove clinician whose ActiveTo dates are not met with current date even after adding 30 days grace period
+                                                    string cunt = Convert.ToDateTime(ConvertDate(listHCP[i].ActiveTo)).AddDays(30).ToString("MM/dd/yyyy hh:mm:ss");
+                                                    bool cunt_b = false;
+                                                    if(Convert.ToDateTime(cunt)<DateTime.Now)
+                                                    {
+                                                        cunt_b = true;
+                                                        Logger.Info("This clinician " + listHCP[i].License + " will be excluded due to the new rule applied 09Feb2021");
+                                                    }
 
-                                                        CheckComma2(listHCP[i].License) + "," +
-                                                        CheckComma2(listHCP[i].FullName) + "," +
-                                                        CheckComma2(listHCP[i].username) + "," +
+                                                    if (!cunt_b)
+                                                    {
+                                                        sb.Append(
+                                                            //ConvertDate(strFrom) + "," +
+                                                            //ConvertDate(strTo) + "," +
 
-                                                        password_local + "," +
+                                                            CheckComma2(listHCP[i].License) + "," +
+                                                            CheckComma2(listHCP[i].FullName) + "," +
+                                                            CheckComma2(listHCP[i].username) + "," +
 
-                                                        CheckComma2(listHCP[i].FacilityLicense) + "," +
-                                                        CheckComma2(listHCP[i].FacilityName) + "," +
-                                                        CheckComma2(listHCP[i].Location) + "," +
+                                                            password_local + "," +
 
-                                                        ConvertDate(listHCP[i].ActiveFrom) + "," +
+                                                            CheckComma2(listHCP[i].FacilityLicense) + "," +
+                                                            CheckComma2(listHCP[i].FacilityName) + "," +
+                                                            CheckComma2(listHCP[i].Location) + "," +
 
-                                                        //New rules as of 27th January 2021 from email "DHCC clinician Analysis"
-                                                        Convert.ToDateTime(ConvertDate(listHCP[i].ActiveTo)).AddDays(30).ToString("MM/dd/yyyy hh:mm:ss") + "," +
+                                                            ConvertDate(listHCP[i].ActiveFrom) + "," +
 
-                                                        CheckComma2(listHCP[i].IsActive) + "," +
-                                                        CheckComma2(listHCP[i].Source) + "," +
-                                                        CheckComma2(listHCP[i].SpecialtyID1) + "," +
-                                                        CheckComma2(listHCP[i].SpecialtyDescription) + "," +
-                                                        CheckComma2(listHCP[i].Gender) + "," +
-                                                        CheckComma2(listHCP[i].Nationality) + "," +
-                                                        CheckComma2(listHCP[i].Email) + "," +
-                                                        CheckComma2(listHCP[i].PhoneNumber) + "," +
-                                                        CheckComma2(listHCP[i].SpecialtyID2) + "," +
-                                                        CheckComma2(listHCP[i].SpecialtyID3) + "," +
-                                                        CheckComma2(listHCP[i].HCType) + "," +
-                                                        "" + "\n"
-                                                        );
+                                                            //New rules as of 27th January 2021 from email "DHCC clinician Analysis"
+                                                            Convert.ToDateTime(ConvertDate(listHCP[i].ActiveTo)).AddDays(30).ToString("MM/dd/yyyy hh:mm:ss") + "," +
+
+                                                            CheckComma2(listHCP[i].IsActive) + "," +
+                                                            CheckComma2(listHCP[i].Source) + "," +
+                                                            CheckComma2(listHCP[i].SpecialtyID1) + "," +
+                                                            CheckComma2(listHCP[i].SpecialtyDescription) + "," +
+                                                            CheckComma2(listHCP[i].Gender) + "," +
+                                                            CheckComma2(listHCP[i].Nationality) + "," +
+                                                            CheckComma2(listHCP[i].Email) + "," +
+                                                            CheckComma2(listHCP[i].PhoneNumber) + "," +
+                                                            CheckComma2(listHCP[i].SpecialtyID2) + "," +
+                                                            CheckComma2(listHCP[i].SpecialtyID3) + "," +
+                                                            CheckComma2(listHCP[i].HCType) + "," +
+                                                            "" + "\n"
+                                                            );
+                                                    }
                                                 }
                                             }
                                         }
